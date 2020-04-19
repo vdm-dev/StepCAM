@@ -36,7 +36,7 @@ QString Utilities::coordinateToString(qint64 coordinate, bool trim)
     while (result.size() < 3)
         result.prepend('0');
 
-    while (trim && !result.isEmpty() && result.back() == '0')
+    while (trim && !result.isEmpty() && result.at(result.size() - 1) == '0')
         result.chop(1);
 
     if (result.isEmpty())
@@ -60,10 +60,10 @@ QString Utilities::doubleToString(double value, int precision, bool trim)
 
     if (trim && result.indexOf('.') > -1)
     {
-        while (result.back() == '0')
+        while (result.at(result.size() - 1) == '0')
             result.chop(1);
 
-        if (result.back() == '.')
+        if (result.at(result.size() - 1) == '.')
             result.chop(1);
     }
 

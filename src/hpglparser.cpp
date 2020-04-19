@@ -66,7 +66,7 @@ bool HpglParser::parse(QFile& file)
             continue;
         }
 
-        if (line.back() != ';')
+        if (line.at(line.size() - 1) != ';')
         {
             warning(tr("Unknown command: '%1'.")
                 .arg((line.size() > 20) ? (line.left(20) + "...") : line));
