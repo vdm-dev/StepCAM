@@ -28,9 +28,9 @@ Copyright &copy; 2020  Dmitry Lavygin (vdm.inbox@gmail.com).
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-GNU General Public License for more details.
+See the GNU General Public License for more details.
 
-Information about licenses for images can be found in the file [img/README.md](https://github.com/vdm-dev/StepCAM/raw/master/img/README.md).
+The information about licenses for images can be found in [img/README.md](https://github.com/vdm-dev/StepCAM/raw/master/img/README.md).
 
 ## Donate
 If you found my program useful, you can thank me with donations via
