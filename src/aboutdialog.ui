@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>450</width>
+    <height>410</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>450</width>
+    <height>410</height>
+   </size>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <layout class="QHBoxLayout" name="_horizontalLayout">
+     <item>
+      <widget class="QLabel" name="_icon">
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>70</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="src.qrc">:/img/icon/icon_64.png</pixmap>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="_verticalLayout">
+       <item>
+        <widget class="QLabel" name="_labelTitle">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>&lt;h2&gt;StepCAM&lt;/h2&gt;</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="_labelVersion">
+         <property name="text">
+          <string>Version 2.0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="_labelCopyright">
+         <property name="text">
+          <string>&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&amp;copy; 2020 Dmitry Lavygin (&lt;a href=&quot;mailto:vdm.inbox@gmail.com&quot;&gt;vdm.inbox@gmail.com&lt;/a&gt;).&lt;/p&gt;
+&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Inspired by original StepCAM 1.79 from Sergey Efremov  (&lt;a href=&quot;mailto:cncservo@yandex.ru&quot;&gt;cncservo@yandex.ru&lt;/a&gt;).&lt;/p&gt;
+&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The following sets of icons are used in the application:&lt;br&gt;
+&amp;bull; LED Icon Set (&lt;a href=&quot;http://led24.de/iconset&quot;&gt;http://led24.de/iconset&lt;/a&gt;);&lt;br&gt;
+&amp;bull; Farm-Fresh Web Icons (&lt;a href=&quot;http://www.fatcow.com/free-icons&quot;&gt;http://www.fatcow.com/free-icons&lt;/a&gt;);&lt;br&gt;
+&amp;bull; Google Material Collection from &lt;a href=&quot;https://www.iconfu.com/&quot;&gt;Iconfu.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;This product is licensed under the &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html&quot;&gt;GNU General Public License 3&lt;/a&gt;.&lt;/p&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="_labelDonate">
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>48</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&lt;a href=&quot;https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=vdm.inbox@gmail.com&amp;lc=RU&amp;item_name=StepCAM2&amp;no_note=0&amp;currency_code=RUB&amp;bn=PP-DonationsBF:btn_donateCC_LG.gif:NonHosted&quot;&gt;&lt;img src=&quot;:/img/donate.png&quot;/&gt;&lt;/a&gt;&lt;span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;a href=&quot;https://money.yandex.ru/to/4100111653323774&quot;&gt;&lt;img src=&quot;:/img/donate_yandex.png&quot;/&gt;&lt;/a&gt;</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::AutoText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="_labelDisclaimer">
+         <property name="text">
+          <string>THE SOFTWARE IS PROVIDED &quot;&lt;b&gt;AS IS&lt;/b&gt;&quot; AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="_verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="_buttons">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="src.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>_buttons</sender>
+   <signal>accepted()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_buttons</sender>
+   <signal>rejected()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

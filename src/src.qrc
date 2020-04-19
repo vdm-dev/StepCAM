@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>../img/open.png</file>
+        <file>../img/refresh.png</file>
+        <file>../img/save.png</file>
+        <file>../img/copy.png</file>
+        <file>../img/cut.png</file>
+        <file>../img/paste.png</file>
+        <file>../img/generate.png</file>
+        <file>../img/script.png</file>
+        <file>../img/script_green.png</file>
+        <file>../img/script_lightning.png</file>
+        <file>../img/script_red.png</file>
+        <file>../img/script_yellow.png</file>
+        <file>../img/settings.png</file>
+        <file>../img/error.png</file>
+        <file>../img/notice.png</file>
+        <file>../img/warning.png</file>
+        <file>../img/page_log.png</file>
+        <file>../img/page_log_error.png</file>
+        <file>../img/page_log_ok.png</file>
+        <file>../img/page_log_warning.png</file>
+        <file>../img/page_settings.png</file>
+        <file>../img/clear.png</file>
+        <file>../img/accept.png</file>
+        <file>../img/stepcam.ico</file>
+        <file>../img/icon/icon_64.png</file>
+        <file>../img/donate.png</file>
+        <file>../img/donate_yandex.png</file>
+    </qresource>
+</RCC>
