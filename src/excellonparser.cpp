@@ -526,7 +526,7 @@ qint64 ExcellonParser::parseNumber(const QString& number, bool* ok)
             while (fractional.size() < 4)
                 fractional.append('0');
 
-            result = number.mid(offset, index).toLongLong() * 10000;
+            result = number.mid(offset, index - offset).toLongLong() * 10000;
             result += fractional.toLongLong();
             result = result * 254 / 100;
 
@@ -561,7 +561,7 @@ qint64 ExcellonParser::parseNumber(const QString& number, bool* ok)
             while (fractional.size() < 3)
                 fractional.append('0');
 
-            result = number.mid(offset, index).toLongLong() * 1000;
+            result = number.mid(offset, index - offset).toLongLong() * 1000;
             result += fractional.toLongLong();
 
             if (ok)
