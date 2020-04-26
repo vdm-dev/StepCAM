@@ -572,7 +572,7 @@ bool MainWindow::fileSave(bool final, bool relocate)
             file.close();
 
             _currentFilePath = fileName;
-            _currentFileName = QFileInfo(_currentFilePath).baseName();
+            _currentFileName = QFileInfo(_currentFilePath).completeBaseName();
             updateProjectState(false);
 
             return true;

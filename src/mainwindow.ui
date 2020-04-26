@@ -54,7 +54,9 @@
               </font>
              </property>
              <property name="plainText">
-              <string notr="true">( Milling )</string>
+              <string notr="true">( Milling )
+G90
+G61</string>
              </property>
             </widget>
            </item>
@@ -105,7 +107,9 @@ M30
               </font>
              </property>
              <property name="plainText">
-              <string notr="true">( Drilling )</string>
+              <string notr="true">( Drilling )
+G90
+G61</string>
              </property>
             </widget>
            </item>
@@ -187,11 +191,11 @@ M30
           <property name="wordWrap">
            <bool>true</bool>
           </property>
-          <attribute name="horizontalHeaderMinimumSectionSize">
-           <number>24</number>
-          </attribute>
           <attribute name="horizontalHeaderDefaultSectionSize">
            <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>24</number>
           </attribute>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
