@@ -204,6 +204,7 @@ void MainWindow::loadSettings()
     settings.beginGroup("Milling");
     _editMillingSpindleSpeed->setValue(settings.value("SpindleSpeed", 10000).toInt());
     _editMillingFeedRate->setValue(settings.value("Feed", 1).toInt());
+    _editMillingPlungeRate->setValue(settings.value("Plunge", 1).toInt());
     _editMillingSafeZ->setValue(settings.value("SafeZ", 1.0).toDouble());
     _editMillingDepth->setValue(settings.value("Depth", 0.0).toDouble());
 
@@ -254,6 +255,7 @@ void MainWindow::saveSettings()
     settings.beginGroup("Milling");
     settings.setValue("SpindleSpeed", _editMillingSpindleSpeed->value());
     settings.setValue("Feed", _editMillingFeedRate->value());
+    settings.setValue("Plunge", _editMillingPlungeRate->value());
     settings.setValue("SafeZ", _editMillingSafeZ->value());
     settings.setValue("Depth", _editMillingDepth->value());
     settings.setValue("Prologue", _editSettingsMillingPrologue->toPlainText());
@@ -695,13 +697,13 @@ void MainWindow::generateMilling()
     _editProgram->append(_editSettingsMillingPrologue->toPlainText());
 
     QString feedRate = QString::number(_editMillingFeedRate->value());
+    QString plungeRate = QString::number(_editMillingPlungeRate->value());
     QString spindleSpeed = QString::number(_editMillingSpindleSpeed->value());
 
     QString safeZ = Utilities::doubleToString(_editMillingSafeZ->value());
     QString depth = Utilities::doubleToString(_editMillingDepth->value());
 
     _editProgram->append(QString("G0 Z").append(safeZ));
-    _editProgram->append(QString("G1 F").append(feedRate));
     _editProgram->append(QString("M3 S").append(spindleSpeed));
 
     foreach (AbstractCurve curve, _parser->curves())
@@ -717,7 +719,8 @@ void MainWindow::generateMilling()
             if (i == 0)
             {
                 _editProgram->append(QString("G0 X%1 Y%2").arg(x, y));
-                _editProgram->append(QString("G1 Z").append(depth));
+                _editProgram->append(QString("G1 Z%1 F%2").arg(depth, plungeRate));
+                _editProgram->append(QString("G1 F").append(feedRate));
             }
             else
             {

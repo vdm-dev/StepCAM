@@ -71,7 +71,7 @@
        <item>
         <widget class="QLabel" name="_labelVersion">
          <property name="text">
-          <string>Version 2.0</string>
+          <string notr="true">VERSION PLACEHOLDER</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

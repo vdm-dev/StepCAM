@@ -381,7 +381,7 @@ M30
           <x>0</x>
           <y>0</y>
           <width>183</width>
-          <height>198</height>
+          <height>243</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -419,6 +419,29 @@ M30
            </property>
            <property name="accelerated">
             <bool>true</bool>
+           </property>
+           <property name="suffix">
+            <string>  mm/min</string>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>1000000</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="_labelMillingPlungeRate">
+           <property name="text">
+            <string>Plunge Rate:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="_editMillingPlungeRate">
+           <property name="focusPolicy">
+            <enum>Qt::StrongFocus</enum>
            </property>
            <property name="suffix">
             <string>  mm/min</string>

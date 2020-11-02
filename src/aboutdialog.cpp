@@ -36,4 +36,6 @@ AboutDialog::AboutDialog(QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
 
     setWindowTitle(tr("About ") + QApplication::applicationName());
+
+    _labelVersion->setText(tr("Version ") + QApplication::applicationVersion());
 }
