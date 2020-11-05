@@ -639,10 +639,10 @@ void MainWindow::generateDrilling()
     QString feedRate = QString::number(_editDrillingFeedRate->value());
     QString spindleSpeed = QString::number(_editDrillingSpindleSpeed->value());
 
-    QString safeZ = Utilities::doubleToString(_editDrillingSafeZ->value());
-    QString depth = Utilities::doubleToString(_editDrillingDepth->value());
-    QString startHeight = Utilities::doubleToString(_editDrillingStartHeight->value());
-    QString toolHeight = Utilities::doubleToString(_editDrillingTcHeight->value());
+    QString safeZ = Utilities::doubleToString(_editDrillingSafeZ->value(), 3);
+    QString depth = Utilities::doubleToString(_editDrillingDepth->value(), 3);
+    QString startHeight = Utilities::doubleToString(_editDrillingStartHeight->value(), 3);
+    QString toolHeight = Utilities::doubleToString(_editDrillingTcHeight->value(), 3);
 
     int toolNumber = 0;
 
@@ -700,8 +700,8 @@ void MainWindow::generateMilling()
     QString plungeRate = QString::number(_editMillingPlungeRate->value());
     QString spindleSpeed = QString::number(_editMillingSpindleSpeed->value());
 
-    QString safeZ = Utilities::doubleToString(_editMillingSafeZ->value());
-    QString depth = Utilities::doubleToString(_editMillingDepth->value());
+    QString safeZ = Utilities::doubleToString(_editMillingSafeZ->value(), 3);
+    QString depth = Utilities::doubleToString(_editMillingDepth->value(), 3);
 
     _editProgram->append(QString("G0 Z").append(safeZ));
     _editProgram->append(QString("M3 S").append(spindleSpeed));

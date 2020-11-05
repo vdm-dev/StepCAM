@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     QApplication application(argc, argv);
 
     application.setApplicationName("StepCAM");
-    application.setApplicationVersion("2.1");
+    application.setApplicationVersion("2.1.1");
     application.setOrganizationName("Dmitry Lavygin");
 
     QCommandLineParser parser;

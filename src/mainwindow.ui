@@ -472,6 +472,9 @@ M30
            <property name="suffix">
             <string>  mm</string>
            </property>
+           <property name="decimals">
+            <number>3</number>
+           </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
            </property>
@@ -497,6 +500,9 @@ M30
            </property>
            <property name="suffix">
             <string>  mm</string>
+           </property>
+           <property name="decimals">
+            <number>3</number>
            </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
@@ -644,6 +650,9 @@ M30
            <property name="suffix">
             <string>  mm</string>
            </property>
+           <property name="decimals">
+            <number>3</number>
+           </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
            </property>
@@ -670,6 +679,9 @@ M30
            <property name="suffix">
             <string>  mm</string>
            </property>
+           <property name="decimals">
+            <number>3</number>
+           </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
            </property>
@@ -695,6 +707,9 @@ M30
            </property>
            <property name="suffix">
             <string>  mm</string>
+           </property>
+           <property name="decimals">
+            <number>3</number>
            </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
@@ -724,6 +739,9 @@ M30
            </property>
            <property name="suffix">
             <string>  mm</string>
+           </property>
+           <property name="decimals">
+            <number>3</number>
            </property>
            <property name="minimum">
             <double>-1000000.000000000000000</double>
