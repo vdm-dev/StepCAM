@@ -29,7 +29,7 @@
 ExcellonParser::ExcellonParser(QObject* parent)
     : AbstractParser(parent)
 {
-    clear();
+    ExcellonParser::clear();
 }
 
 void ExcellonParser::clear()
@@ -44,6 +44,7 @@ void ExcellonParser::clear()
     _format = FormatUnknown;
     _units = UnitsUnknown;
     _lineNumber = 1;
+    _interrupted = false;
     _toolNumber = 0;
 
     _minX = 0;
@@ -59,8 +60,16 @@ bool ExcellonParser::parse(QFile& file)
 {
     clear();
 
+    emit started(tr("Loading Excellon"));
+
     while (!file.atEnd())
     {
+        if (_interrupted)
+            return false;
+
+        int done = static_cast<int>(file.pos() * 100 / file.size());
+        emit progress(done, 100);
+
         QString line = QString::fromLatin1(file.readLine()).trimmed();
 
         bool abort = false;
@@ -93,8 +102,12 @@ bool ExcellonParser::parse(QFile& file)
         _lineNumber++;
     }
 
+    emit progress(100, 100);
+
     if (_flagNeedRecalculate)
     {
+        emit started(tr("Recalculating Points"));
+
         bool ok = true;
 
         if (_format == FormatUnknown)
@@ -105,6 +118,11 @@ bool ExcellonParser::parse(QFile& file)
         {
             for (int i = 0; i < _points.size(); ++i)
             {
+                if (_interrupted)
+                    return false;
+
+                emit progress(i, _points.size());
+
                 AbstractCurve& point = _points[i];
 
                 if (point._type == AbstractCurve::CurveTypePoint)
@@ -144,7 +162,7 @@ bool ExcellonParser::parse(QFile& file)
                     break;
                 }
             }
-
+            emit progress(_points.size(), _points.size());
         }
 
         if (!ok)
@@ -179,7 +197,14 @@ bool ExcellonParser::parse(QFile& file)
             .arg(minX, maxX, dltX, minY, maxY, dltY), " ");
     }
 
+    emit finished();
+
     return true;
+}
+
+void ExcellonParser::interrupt()
+{
+    _interrupted = true;
 }
 
 bool ExcellonParser::parseComment(const QString& line, bool& abort)

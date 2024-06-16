@@ -43,6 +43,9 @@ public:
     virtual const QMap<int, AbstractTool>& tools() const;
     virtual const QList<AbstractCurve>& curves() const;
 
+public slots:
+    virtual void interrupt();
+
 private:
     enum Stage
     {

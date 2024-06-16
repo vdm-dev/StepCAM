@@ -26,6 +26,7 @@
 
 #include "logtablemodel.h"
 #include "abstractparser.h"
+#include "progressstatuswidget.h"
 
 
 class MainWindow : public QMainWindow, private Ui::MainWindow
@@ -57,6 +58,10 @@ private slots:
     void settingsClose();
     void layoutReset();
     void showAboutDialog();
+    void operationStarted(const QString& operation);
+    void operationProgress(int done, int total);
+    void operationFinished();
+    void cancelOperation();
 
 private:
     void fileClose();
@@ -99,6 +104,9 @@ private:
     LogTableModel _log;
 
     AbstractParser* _parser;
+
+    ProgressStatusWidget* _progress;
+    bool _operationCanceled;
 };
 
 

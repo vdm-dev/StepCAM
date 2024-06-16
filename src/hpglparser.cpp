@@ -29,7 +29,7 @@
 HpglParser::HpglParser(QObject* parent)
     : AbstractParser(parent)
 {
-    clear();
+    HpglParser::clear();
 }
 
 void HpglParser::clear()
@@ -41,6 +41,7 @@ void HpglParser::clear()
     _curves.clear();
 
     _lineNumber = 1;
+    _interrupted = false;
 
     _toolIsUp = true;
 }
@@ -56,8 +57,16 @@ bool HpglParser::parse(QFile& file)
 
     bool flagSetLimits = true;
 
+    emit started(tr("Loading HPGL"));
+
     while (!file.atEnd())
     {
+        if (_interrupted)
+            return false;
+
+        int done = static_cast<int>(file.pos() * 100 / file.size());
+        emit progress(done, 100);
+
         QString line = QString::fromLatin1(file.readLine()).trimmed();
 
         if (line.isEmpty())
@@ -176,6 +185,8 @@ bool HpglParser::parse(QFile& file)
         _lineNumber++;
     }
 
+    emit progress(100, 100);
+
     QString sMinX = Utilities::coordinateToString(minX);
     QString sMaxX = Utilities::coordinateToString(maxX);
     QString sDltX = Utilities::coordinateToString(maxX - minX);
@@ -189,5 +200,12 @@ bool HpglParser::parse(QFile& file)
         "Ymin = %4 mm, Ymax = %5 mm, \xCE\x94Y = %6 mm.")
         .arg(sMinX, sMaxX, sDltX, sMinY, sMaxY, sDltY), " ");
 
+    emit finished();
+
     return true;
+}
+
+void HpglParser::interrupt()
+{
+    _interrupted = true;
 }

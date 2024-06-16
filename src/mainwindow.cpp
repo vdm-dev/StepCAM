@@ -38,6 +38,8 @@
 MainWindow::MainWindow(QWidget* parent)
     : QMainWindow(parent)
     , _parser(nullptr)
+    , _progress(nullptr)
+    , _operationCanceled(false)
 {
     setupUi(this);
 
@@ -46,6 +48,10 @@ MainWindow::MainWindow(QWidget* parent)
     setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
     setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
     setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
+
+    _progress = new ProgressStatusWidget();
+    _statusBar->addPermanentWidget(_progress);
+    _progress->hide();
 
     MouseWheelEventFilter* mouseWheelEventFilter = new MouseWheelEventFilter(this);
     QList<QAbstractSpinBox*> spinBoxes = _dockMilling->findChildren<QAbstractSpinBox*>() +
@@ -390,20 +396,34 @@ void MainWindow::generate()
     if (!_parser)
         return;
 
+    _operationCanceled = false;
+    connect(_progress, SIGNAL(canceled()), this, SLOT(cancelOperation()));
+
     if (_parser->type() == AbstractParser::ParserDrilling)
     {
+        operationStarted(tr("Creating Drilling Program"));
         generateDrilling();
+        operationFinished();
     }
     else if (_parser->type() == AbstractParser::ParserMillling)
     {
+        operationStarted(tr("Creating Millling Program"));
         generateMilling();
+        operationFinished();
     }
     else
     {
         return;
     }
 
-    _log.accept(tr("The program has been successfully built."), tr("[Program]"));
+    if (_operationCanceled)
+    {
+        _log.warning(tr("Building the program has been canceled."), tr("[Program]"));
+    }
+    else
+    {
+        _log.accept(tr("The program has been successfully built."), tr("[Program]"));
+    }
 
     _tabs->setCurrentWidget(_tabProgram);
 
@@ -438,6 +458,31 @@ void MainWindow::showAboutDialog()
 
     if (dialog)
         dialog->open();
+}
+
+void MainWindow::operationStarted(const QString& operation)
+{
+    _progress->setText(operation);
+    _progress->setValue(0);
+    _progress->show();
+    QApplication::processEvents();
+}
+
+void MainWindow::operationProgress(int done, int total)
+{
+    _progress->setProgress(done, total);
+    QApplication::processEvents();
+}
+
+void MainWindow::operationFinished()
+{
+    _progress->hide();
+    QApplication::processEvents();
+}
+
+void MainWindow::cancelOperation()
+{
+    _operationCanceled = true;
 }
 
 void MainWindow::fileClose()
@@ -523,6 +568,14 @@ void MainWindow::fileOpen(const QString& fileName)
     }
     else
     {
+        if (_parser && _parser->isInterrupted())
+        {
+            _log.warning(tr("The file parsing was interrupted."), fileInfo.fileName());
+            delete _parser;
+            _parser = nullptr;
+            return;
+        }
+
         QMessageBox::critical(this, QApplication::applicationName(), QString("%1<br>%2.<br><br>%3")
             .arg(errorHeader, fileName, errorReason), QMessageBox::Ok, QMessageBox::Ok);
 
@@ -590,34 +643,43 @@ bool MainWindow::fileSave(bool final, bool relocate)
 
 bool MainWindow::fileParse(QFile& file, const QString& extension)
 {
+    QDockWidget* dockWidget = nullptr;
+
     if (extension == "drl")
     {
         _parser = new ExcellonParser(this);
-
-        connect(_parser, SIGNAL(log(int, const QString&, const QString&)), this,
-            SLOT(logParser(int, const QString&, const QString&)));
-
-        if (_parser && _parser->parse(file))
-        {
-            _dockDrilling->setEnabled(true);
-            return true;
-        }
+        dockWidget = _dockDrilling;
     }
     else if (extension == "plt")
     {
         _parser = new HpglParser(this);
-
-        connect(_parser, SIGNAL(log(int, const QString&, const QString&)), this,
-            SLOT(logParser(int, const QString&, const QString&)));
-
-        if (_parser && _parser->parse(file))
-        {
-            _dockMilling->setEnabled(true);
-            return true;
-        }
+        dockWidget = _dockMilling;
+    }
+    else
+    {
+        return false;
     }
 
-    return false;
+    if (!_parser)
+        return false;
+
+    connect(_progress, SIGNAL(canceled()), _parser, SLOT(interrupt()));
+    connect(_parser, SIGNAL(started(const QString&)),
+        this, SLOT(operationStarted(const QString&)));
+    connect(_parser, SIGNAL(progress(int, int)),
+        this, SLOT(operationProgress(int, int)));
+    connect(_parser, SIGNAL(finished()),
+        this, SLOT(operationFinished()));
+
+    connect(_parser, SIGNAL(log(int, const QString&, const QString&)), this,
+        SLOT(logParser(int, const QString&, const QString&)));
+
+    bool result = _parser->parse(file);
+    if (result && dockWidget)
+        dockWidget->setEnabled(true);
+
+    _progress->hide();
+    return result;
 }
 
 void MainWindow::generateDrilling()
@@ -652,8 +714,15 @@ void MainWindow::generateDrilling()
     if (_checkDrillingSingleTool->isChecked())
         _editProgram->append(QString("M3 S").append(spindleSpeed));
 
-    foreach (AbstractCurve point, _parser->curves())
+    int total = _parser->curves().count();
+    for (int i = 0; i < total; ++i)
     {
+        const AbstractCurve& point = _parser->curves()[i];
+        operationProgress(i, total);
+
+        if (_operationCanceled)
+            return;
+
         if (!_checkDrillingSingleTool->isChecked() && point.tool() != toolNumber)
         {
             QString tool = QString::number(point.tool());
@@ -706,8 +775,15 @@ void MainWindow::generateMilling()
     _editProgram->append(QString("G0 Z").append(safeZ));
     _editProgram->append(QString("M3 S").append(spindleSpeed));
 
-    foreach (AbstractCurve curve, _parser->curves())
+    int total = _parser->curves().count();
+    for (int i = 0; i < total; ++i)
     {
+        const AbstractCurve& curve = _parser->curves()[i];
+        operationProgress(i, total);
+
+        if (_operationCanceled)
+            return;
+
         if (curve.type() == AbstractCurve::CurveTypeNone)
             continue;
 

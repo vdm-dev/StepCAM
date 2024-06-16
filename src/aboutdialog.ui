@@ -81,7 +81,7 @@
        <item>
         <widget class="QLabel" name="_labelCopyright">
          <property name="text">
-          <string>&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&amp;copy; 2020 Dmitry Lavygin (&lt;a href=&quot;mailto:vdm.inbox@gmail.com&quot;&gt;vdm.inbox@gmail.com&lt;/a&gt;).&lt;/p&gt;
+          <string>&lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;&amp;copy; 2024 Dmitry Lavygin (&lt;a href=&quot;mailto:vdm.inbox@gmail.com&quot;&gt;vdm.inbox@gmail.com&lt;/a&gt;).&lt;/p&gt;
 &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;Inspired by original StepCAM 1.79 from Sergey Efremov  (&lt;a href=&quot;mailto:cncservo@yandex.ru&quot;&gt;cncservo@yandex.ru&lt;/a&gt;).&lt;/p&gt;
 &lt;p style=&quot;margin: 0 0 6px 0;&quot;&gt;The following sets of icons are used in the application:&lt;br&gt;
 &amp;bull; LED Icon Set (&lt;a href=&quot;http://led24.de/iconset&quot;&gt;http://led24.de/iconset&lt;/a&gt;);&lt;br&gt;

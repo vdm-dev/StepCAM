@@ -20,6 +20,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mousewheeleventfilter.cpp \
+    progressstatuswidget.cpp \
     utilities.cpp
 
 HEADERS += \
@@ -32,11 +33,13 @@ HEADERS += \
     logtablemodel.h \
     mainwindow.h \
     mousewheeleventfilter.h \
+    progressstatuswidget.h \
     utilities.h
 
 FORMS += \
     aboutdialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    progressstatuswidget.ui
 
 RESOURCES += \
     src.qrc

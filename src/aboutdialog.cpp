@@ -1,7 +1,7 @@
 //
 // This file is part of StepCAM 2.
 // Project URL: https://github.com/vdm-dev/StepCAM
-// Copyright (c) 2020  Dmitry Lavygin (vdm.inbox@gmail.com).
+// Copyright (c) 2024  Dmitry Lavygin (vdm.inbox@gmail.com).
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -38,4 +38,5 @@ AboutDialog::AboutDialog(QWidget* parent)
     setWindowTitle(tr("About ") + QApplication::applicationName());
 
     _labelVersion->setText(tr("Version ") + QApplication::applicationVersion());
+    _labelDonate->hide();
 }

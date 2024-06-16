@@ -40,6 +40,9 @@ public:
     virtual const QMap<int, AbstractTool>& tools() const;
     virtual const QList<AbstractCurve>& curves() const;
 
+public slots:
+    virtual void interrupt();
+
 private:
     QMap<int, AbstractTool> _tools;
     QList<AbstractCurve> _curves;

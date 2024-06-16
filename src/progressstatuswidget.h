@@ -18,31 +18,34 @@
 //
 
 
-#include "mainwindow.h"
-
-#include <QApplication>
-#include <QCommandLineParser>
+#ifndef PROGRESSSTATUSWIDGET_H
+#define PROGRESSSTATUSWIDGET_H
 
 
-int main(int argc, char *argv[])
+#include "ui_progressstatuswidget.h"
+
+
+class ProgressStatusWidget : public QWidget, private Ui::ProgressStatusWidget
 {
-    QApplication application(argc, argv);
+    Q_OBJECT
 
-    application.setApplicationName("StepCAM");
-    application.setApplicationVersion("2.2.0");
-    application.setOrganizationName("Dmitry Lavygin");
+public:
+    explicit ProgressStatusWidget(QWidget* parent = nullptr);
 
-    QCommandLineParser parser;
-    parser.setApplicationDescription(application.applicationName());
-    parser.addPositionalArgument("file", "The file to open.");
-    parser.process(application);
+signals:
+    void canceled();
 
-    MainWindow mainWindow;
+public slots:
+    void reset();
+    void setRange(int minimum, int maximum);
+    void setMinimum(int minimum);
+    void setMaximum(int maximum);
+    void setText(const QString& text);
+    void setTextVisible(bool visible);
+    void setProgressVisible(bool visible);
+    void setValue(int value);
+    void setProgress(int done, int total);
+};
 
-    if (!parser.positionalArguments().isEmpty())
-        mainWindow.loadExternalFile(parser.positionalArguments().first());
 
-    mainWindow.show();
-
-    return application.exec();
-}
+#endif // PROGRESSSTATUSWIDGET_H

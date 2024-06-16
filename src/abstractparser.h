@@ -113,6 +113,7 @@ public:
     explicit AbstractParser(QObject* parent = nullptr)
         : QObject(parent)
         , _lineNumber(0)
+        , _interrupted(false)
     {
     }
 
@@ -129,11 +130,20 @@ public:
     void notice(const QString& description, const QString& line = QString());
     void accept(const QString& description, const QString& line = QString());
 
+    bool isInterrupted() const { return _interrupted; }
+
+public slots:
+    virtual void interrupt() = 0;
+
 signals:
     void log(int severity, const QString& description, const QString& line);
+    void started(const QString& operation);
+    void progress(int done, int total);
+    void finished();
 
 protected:
     int _lineNumber;
+    bool _interrupted;
 };
 
 

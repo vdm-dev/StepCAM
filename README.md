@@ -23,7 +23,7 @@ The application was written under the influence of StepCAM 1.79 by Sergey Efremo
 ![StepCAM 2](https://github.com/vdm-dev/StepCAM/raw/master/screenshot.png)
 
 ## Licensing
-Copyright &copy; 2020  Dmitry Lavygin (vdm.inbox@gmail.com).
+Copyright &copy; 2024  Dmitry Lavygin (vdm.inbox@gmail.com).
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
